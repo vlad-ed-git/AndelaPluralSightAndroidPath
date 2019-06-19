@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BooksListActivity"
-    android:padding="16dp">
+    tools:context=".BooksListActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -15,11 +14,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/book_query_response_tv"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/book_query_response_rv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/loading_txt"
             />
     </ScrollView>
 

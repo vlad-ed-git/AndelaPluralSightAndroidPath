@@ -2,4 +2,6 @@
     <string name="app_name">BooksApp</string>
     <string name="err_txt">Failed to fetch book data!</string>
     <string name="loading_txt">Loading please wait</string>
+    <string name="icons_desc">books app icons</string>
+    <string name="search_txt">Search</string>
 </resources>

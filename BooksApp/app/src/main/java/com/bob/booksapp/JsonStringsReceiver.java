@@ -1,5 +1,7 @@
 package com.bob.booksapp;
 
+import java.util.ArrayList;
+
 public interface JsonStringsReceiver {
-    void delegate(String json_result);
+    void delegate(ArrayList<Books> booksArrayList);
 }

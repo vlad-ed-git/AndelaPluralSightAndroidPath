@@ -3,10 +3,14 @@ package com.bob.booksapp;
 import android.net.Uri;
 import android.util.Log;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ApiUtil {
@@ -55,5 +59,45 @@ public class ApiUtil {
             httpURLConnection.disconnect();
         }
 
+    }
+
+    public static ArrayList<Books> getBooksFromJson(String jsonString){
+
+        final String ID = "id" ;
+        final String TITLE = "title";
+        final String SUBTITLE ="subtitle";
+        final String AUTHORS = "authors";
+        final String PUBLISHER = "publisher";
+        final String PUBLISHED_DATE ="publishedDate";
+        final String ITEMS = "items";
+        final String VOLUME_INFO = "volumeInfo";
+
+        try{
+            JSONObject resultsObject = new JSONObject(jsonString);
+            JSONArray booksArray =  resultsObject.getJSONArray(ITEMS);
+
+            ArrayList<Books>  booksArrayList = new ArrayList<>();
+
+            int number_of_books = booksArray.length();
+
+            for (int i = 0; i < number_of_books; i++){
+
+                JSONObject  bookJson = booksArray.getJSONObject(i);
+                JSONObject  bookVolumeInfo = bookJson.getJSONObject(VOLUME_INFO);
+                int total_authors = bookVolumeInfo.getJSONArray(AUTHORS).length();
+                String[] authors = new String[total_authors];
+                for(int j=0; j<total_authors; j++){
+                   authors[j] = bookVolumeInfo.getJSONArray(AUTHORS).get(j).toString();
+                }
+
+                Books book = new Books(bookJson.getString(ID), bookVolumeInfo.getString(TITLE), (bookVolumeInfo.isNull(SUBTITLE) ? "-subtitle not found-" : bookVolumeInfo.getString(SUBTITLE)), authors, bookVolumeInfo.getString(PUBLISHER), bookVolumeInfo.getString(PUBLISHED_DATE) );
+                booksArrayList.add(book);
+            }
+            return booksArrayList;
+
+        }catch (Exception e){
+            Log.d("parsing Json books" , e.getMessage());
+            return null;
+        }
     }
 }
