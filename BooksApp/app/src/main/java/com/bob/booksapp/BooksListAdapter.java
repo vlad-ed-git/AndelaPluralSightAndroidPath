@@ -1,5 +1,6 @@
 package com.bob.booksapp;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -37,7 +38,7 @@ public class BooksListAdapter extends RecyclerView.Adapter<BooksListAdapter.Book
         return booksArrayList.size();
     }
 
-    public class BooksViewHolder extends RecyclerView.ViewHolder {
+    public class BooksViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView book_open_icon;
         TextView book_title,book_authors,book_published_date, book_publisher;
@@ -47,26 +48,24 @@ public class BooksListAdapter extends RecyclerView.Adapter<BooksListAdapter.Book
             book_title = itemView.findViewById(R.id.book_title);
             book_authors = itemView.findViewById(R.id.book_authors);
             book_publisher = itemView.findViewById(R.id.book_publisher);
-            book_published_date = itemView.findViewById(R.id.book_published_date);
+            book_published_date = itemView.findViewById(R.id.book_published_date_tv);
+            itemView.setOnClickListener(this);
         }
 
         public void bindData(Books book){
             book_title.setText(book.title);
-            StringBuilder authors = new StringBuilder();
-            int total_authors = book.authors.length;
-            for (String author: book.authors) {
-                total_authors --;
-                authors.append(author);
-                if(total_authors > 0 )
-                    authors.append(", ");
-
-            }
-            book_authors.setText(authors.toString());
+            book_authors.setText(book.authors);
             book_publisher.setText(book.publisher);
             book_published_date.setText(book.publishedDate);
 
         }
 
+        @Override
+        public void onClick(View v) {
+            int clicked_item_position = getAdapterPosition();
+            Books book = booksArrayList.get(clicked_item_position);
+            v.getContext().startActivity((new Intent(v.getContext(), BookDetailsActivity.class)).putExtra("Book", book));
+        }
     }
 
 }

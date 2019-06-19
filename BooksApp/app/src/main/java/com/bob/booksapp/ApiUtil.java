@@ -71,6 +71,7 @@ public class ApiUtil {
         final String PUBLISHED_DATE ="publishedDate";
         final String ITEMS = "items";
         final String VOLUME_INFO = "volumeInfo";
+        final String DESCRIPTION = "description";
 
         try{
             JSONObject resultsObject = new JSONObject(jsonString);
@@ -90,7 +91,7 @@ public class ApiUtil {
                    authors[j] = bookVolumeInfo.getJSONArray(AUTHORS).get(j).toString();
                 }
 
-                Books book = new Books(bookJson.getString(ID), bookVolumeInfo.getString(TITLE), (bookVolumeInfo.isNull(SUBTITLE) ? "-subtitle not found-" : bookVolumeInfo.getString(SUBTITLE)), authors, bookVolumeInfo.getString(PUBLISHER), bookVolumeInfo.getString(PUBLISHED_DATE) );
+                Books book = new Books(bookJson.getString(ID), bookVolumeInfo.getString(TITLE), (bookVolumeInfo.isNull(SUBTITLE) ? "-subtitle not found-" : bookVolumeInfo.getString(SUBTITLE)), authors, bookVolumeInfo.getString(PUBLISHER), bookVolumeInfo.getString(PUBLISHED_DATE), bookVolumeInfo.getString(DESCRIPTION) );
                 booksArrayList.add(book);
             }
             return booksArrayList;
