@@ -1,4 +1,5 @@
 package com.bob.booksapp;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -23,6 +25,16 @@ public class BooksListActivity extends AppCompatActivity implements SearchView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_books_list);
+
+        String query = getIntent().getStringExtra("query");
+        if(query != null && query.isEmpty()){
+            try {
+                loadBooks(new URL(query));
+            }catch (MalformedURLException e){
+                Log.d("advanced search query" , "receiving intent " + e.getMessage());
+            }
+        }
+
 
         book_query_response_rv = findViewById(R.id.book_query_response_rv);
         loading_indicator  = findViewById(R.id.loading_indicator);
@@ -57,6 +69,17 @@ public class BooksListActivity extends AppCompatActivity implements SearchView.O
         final SearchView searchActionView = (SearchView) searchMenuItem.getActionView();
         searchActionView.setOnQueryTextListener(this);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == R.id.action_advanced_search) {
+            startActivity(new Intent(this, SearchActivity.class));
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+
     }
 
     @Override

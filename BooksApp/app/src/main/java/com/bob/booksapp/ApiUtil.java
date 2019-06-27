@@ -23,6 +23,12 @@ public class ApiUtil {
     public static final String KEY = "key";
     public static final String API_KEY = "AIzaSyCcFM2mwD7i0OHFOoPLZN-6TB4uGuOeUSQ";
 
+    // advanced search strings
+    private static final String TITLE = "intitle:";
+    private static final String AUTHOR = "inauthor:";
+    private static final String PUBLISHER = "inpublisher:";
+    private static final String ISBN = "isbn:";
+
     public static URL buildUrl(String title_to_query){
         Uri uri_to_query = Uri.parse(BASE_API_URL).buildUpon()
                 .appendQueryParameter(QUERY_PARAM_KEY, title_to_query)
@@ -36,6 +42,32 @@ public class ApiUtil {
             Log.d("Error building query: " , e.getMessage());
         }
         return url_to_query;
+    }
+
+
+    //advanced search
+    public static URL buildUrl(String title, String author, String publisher, String isbn){
+
+        StringBuilder stringBuilder = new StringBuilder();
+        if(!title.isEmpty()) stringBuilder.append(TITLE + title + "+");
+        if(!author.isEmpty()) stringBuilder.append(AUTHOR + author + "+");
+        if(!publisher.isEmpty()) stringBuilder.append(PUBLISHER + publisher + "+");
+        if(!isbn.isEmpty()) stringBuilder.append(ISBN + isbn + "+");
+        stringBuilder.setLength(stringBuilder.length() - 1 ); //remove last + sign
+
+        Uri uri_to_query = Uri.parse(BASE_API_URL).buildUpon()
+                .appendQueryParameter(QUERY_PARAM_KEY, stringBuilder.toString())
+                .appendQueryParameter(KEY, API_KEY)
+                .build();
+
+        URL url_to_query = null;
+        try{
+            url_to_query = new URL(uri_to_query.toString());
+        }catch (Exception e){
+            Log.d("Error building query: " , "ADVANCED SEARCH " + e.getMessage());
+        }
+        return url_to_query;
+
     }
 
     public static String getJSON(URL url_to_query) throws IOException {
