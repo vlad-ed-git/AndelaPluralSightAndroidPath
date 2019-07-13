@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">ChallengeOne</string>
+    <string name="welcome_to_alc">Welcome To ALC 4.0</string>
+    <string name="my_profile">MY PROFILE</string>
+    <string name="about_alc">ABOUT ALC</string>
+    <string name="alc_title">ALC Phase 4.1</string>
+    <string name="app_icon_desc">app icons</string>
+    <string name="about_alc_url">https://andela.com/alc/</string>
+    <string name="track_txt">Track</string>
+    <string name="android_txt">Android</string>
+    <string name="country_txt">Country</string>
+    <string name="my_country_txt">Tanzania</string>
+    <string name="email_txt">Email</string>
+    <string name="my_email_txt">vlad.edna@gmail.com</string>
+    <string name="phone_txt">Phone</string>
+    <string name="my_phone_txt">(86) 173 7074 3331</string>
+    <string name="slack_username_txt">Slack Username</string>
+    <string name="my_slack_username_txt">Vladimir Peter</string>
+    <string name="my_name">Vladimir</string>
+    <string name="app_images">app images</string>
+</resources>
