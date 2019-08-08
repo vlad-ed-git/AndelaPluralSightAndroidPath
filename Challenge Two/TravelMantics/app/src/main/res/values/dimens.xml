@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="medium_clickable">56dp</dimen>
+    <dimen name="medium_margin">16dp</dimen>
+    <dimen name="small_clickable">24dp</dimen>
+    <dimen name="medium_txt">16sp</dimen>
+    <dimen name="std_margin">8dp</dimen>
+    <dimen name="std_txt">12sp</dimen>
+</resources>

@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">TravelMantics</string>
+    <string name="deal_title_txt">Deal Title</string>
+    <string name="price_numbers_only_txt">Price (numbers only)</string>
+    <string name="description_txt">Description</string>
+    <string name="save_txt">save</string>
+    <string name="deal_saved_success">Deal has been saved</string>
+    <string name="deal_saved_err">Saving deal failed. Try again</string>
+    <string name="deal_reading_err">Failed to read deal</string>
+    <string name="app_images">travelmantics images</string>
+    <string name="insert_txt">Add</string>
+    <string name="deal_deleted_success">Deal has been deleted</string>
+    <string name="deal_deleted_err">Failed to delete deal</string>
+    <string name="provide_deal_info">Please provide all deal info.</string>
+    <string name="delete_deal_txt">DELETE</string>
+    <string name="logout_txt">Log Off</string>
+    <string name="upload_image_txt">Upload Image</string>
+    <string name="img_uploading_err">Failed to upload your image.</string>
+    <string name="img_uploading_success">Image uploaded</string>
+    <string name="please_wait">Please wait... uploading your image!</string>
+    <string name="img_upload_please_wait">Uploading image... Please wait</string>
+    <string name="deal_deleted_wait">Deleting the deal image now.</string>
+    <string name="img_deleted_err">Failed to delete image</string>
+</resources>
