@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">BooksApp</string>
+    <string name="err_txt">Failed to fetch book data!</string>
+    <string name="loading_txt">Loading please wait</string>
+    <string name="icons_desc">books app icons</string>
+    <string name="search_txt">Search</string>
+    <string name="search_book_txt">SEARCH BOOK</string>
+    <string name="insert_isbn_txt">Insert ISBN</string>
+    <string name="insert_publisher_txt">Insert Publisher</string>
+    <string name="insert_author_txt">Insert Author</string>
+    <string name="insert_title_txt">Insert Title</string>
+    <string name="advanced_search_txt">advanced search</string>
+</resources>

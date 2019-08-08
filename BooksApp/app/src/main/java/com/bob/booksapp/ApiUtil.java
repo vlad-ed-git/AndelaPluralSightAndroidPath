@@ -1,0 +1,136 @@
+package com.bob.booksapp;
+
+import android.net.Uri;
+import android.util.Log;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class ApiUtil {
+
+    private static final String QUERY_PARAM_KEY = "q";
+
+    private ApiUtil(){}
+
+    public static final String BASE_API_URL = "https://www.googleapis.com/books/v1/volumes/";
+    public static final String KEY = "key";
+    public static final String API_KEY = "AIzaSyCcFM2mwD7i0OHFOoPLZN-6TB4uGuOeUSQ";
+
+    // advanced search strings
+    private static final String TITLE = "intitle:";
+    private static final String AUTHOR = "inauthor:";
+    private static final String PUBLISHER = "inpublisher:";
+    private static final String ISBN = "isbn:";
+
+    public static URL buildUrl(String title_to_query){
+        Uri uri_to_query = Uri.parse(BASE_API_URL).buildUpon()
+                .appendQueryParameter(QUERY_PARAM_KEY, title_to_query)
+                .appendQueryParameter(KEY, API_KEY)
+                .build();
+
+        URL url_to_query = null;
+        try{
+            url_to_query = new URL(uri_to_query.toString());
+        }catch (Exception e){
+            Log.d("Error building query: " , e.getMessage());
+        }
+        return url_to_query;
+    }
+
+
+    //advanced search
+    public static URL buildUrl(String title, String author, String publisher, String isbn){
+
+        StringBuilder stringBuilder = new StringBuilder();
+        if(!title.isEmpty()) stringBuilder.append(TITLE + title + "+");
+        if(!author.isEmpty()) stringBuilder.append(AUTHOR + author + "+");
+        if(!publisher.isEmpty()) stringBuilder.append(PUBLISHER + publisher + "+");
+        if(!isbn.isEmpty()) stringBuilder.append(ISBN + isbn + "+");
+        stringBuilder.setLength(stringBuilder.length() - 1 ); //remove last + sign
+
+        Uri uri_to_query = Uri.parse(BASE_API_URL).buildUpon()
+                .appendQueryParameter(QUERY_PARAM_KEY, stringBuilder.toString())
+                .appendQueryParameter(KEY, API_KEY)
+                .build();
+
+        URL url_to_query = null;
+        try{
+            url_to_query = new URL(uri_to_query.toString());
+        }catch (Exception e){
+            Log.d("Error building query: " , "ADVANCED SEARCH " + e.getMessage());
+        }
+        return url_to_query;
+
+    }
+
+    public static String getJSON(URL url_to_query) throws IOException {
+        HttpURLConnection httpURLConnection = (HttpURLConnection) url_to_query.openConnection();
+        InputStream inputStream = httpURLConnection.getInputStream();
+        // scanner buffers the data and encodes the character to utf-16, the android format
+        Scanner scanner = new Scanner(inputStream);
+        scanner.useDelimiter("\\A");
+        try {
+            boolean hasNextData = scanner.hasNext();
+            if (hasNextData)
+                return scanner.next();
+            else
+                return null;
+
+        }catch (Exception e){
+            Log.d("Exc scanning query:", e.getMessage());
+            return null;
+        }finally{
+            // close the connection
+            httpURLConnection.disconnect();
+        }
+
+    }
+
+    public static ArrayList<Books> getBooksFromJson(String jsonString){
+
+        final String ID = "id" ;
+        final String TITLE = "title";
+        final String SUBTITLE ="subtitle";
+        final String AUTHORS = "authors";
+        final String PUBLISHER = "publisher";
+        final String PUBLISHED_DATE ="publishedDate";
+        final String ITEMS = "items";
+        final String VOLUME_INFO = "volumeInfo";
+        final String DESCRIPTION = "description";
+
+        try{
+            JSONObject resultsObject = new JSONObject(jsonString);
+            JSONArray booksArray =  resultsObject.getJSONArray(ITEMS);
+
+            ArrayList<Books>  booksArrayList = new ArrayList<>();
+
+            int number_of_books = booksArray.length();
+
+            for (int i = 0; i < number_of_books; i++){
+
+                JSONObject  bookJson = booksArray.getJSONObject(i);
+                JSONObject  bookVolumeInfo = bookJson.getJSONObject(VOLUME_INFO);
+                int total_authors = bookVolumeInfo.getJSONArray(AUTHORS).length();
+                String[] authors = new String[total_authors];
+                for(int j=0; j<total_authors; j++){
+                   authors[j] = bookVolumeInfo.getJSONArray(AUTHORS).get(j).toString();
+                }
+
+                Books book = new Books(bookJson.getString(ID), bookVolumeInfo.getString(TITLE), (bookVolumeInfo.isNull(SUBTITLE) ? "-subtitle not found-" : bookVolumeInfo.getString(SUBTITLE)), authors, bookVolumeInfo.getString(PUBLISHER), bookVolumeInfo.getString(PUBLISHED_DATE), bookVolumeInfo.getString(DESCRIPTION) );
+                booksArrayList.add(book);
+            }
+            return booksArrayList;
+
+        }catch (Exception e){
+            Log.d("parsing Json books" , e.getMessage());
+            return null;
+        }
+    }
+}

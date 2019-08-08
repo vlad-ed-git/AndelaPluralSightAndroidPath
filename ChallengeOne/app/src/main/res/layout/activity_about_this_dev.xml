@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".AboutThisDev"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.Toolbar
+    android:id="@+id/my_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/colorAccent"
+    android:elevation="4dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    app:title="@string/my_profile" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/my_profile_pic"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/profile_pic_size"
+            android:layout_marginTop="@dimen/medium_space"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/app_images"/>
+
+
+        <TextView
+            android:id="@+id/my_name_tv"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/standard_clickable_element"
+            android:layout_marginTop="@dimen/medium_space"
+            app:layout_constraintTop_toBottomOf="@id/my_profile_pic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:gravity="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:fontFamily="@font/oswald"
+            android:textSize="@dimen/large_text"
+            android:text="@string/my_name"/>
+
+        <View
+            android:id="@+id/vertical_line_v"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintTop_toBottomOf="@id/my_name_tv"
+            android:layout_marginTop="@dimen/medium_space"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@color/colorPrimaryDark" />
+
+        <!-- TRACK -->
+        <TextView
+            android:id="@+id/track_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/standard_clickable_element"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/vertical_line_v"
+            android:layout_marginTop="@dimen/medium_space"
+            android:layout_marginStart="@dimen/medium_space"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/oswald"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="@string/track_txt"
+            android:textSize="@dimen/medium_text"/>
+
+        <TextView
+            android:id="@+id/my_track_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/standard_clickable_element"
+            app:layout_constraintStart_toEndOf="@id/track_tv"
+            app:layout_constraintTop_toBottomOf="@id/vertical_line_v"
+            android:layout_marginTop="@dimen/medium_space"
+            android:layout_marginStart="@dimen/medium_space"
+            android:layout_marginEnd="@dimen/medium_space"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/allerta_stencil"
+            android:textColor="@color/colorAccent"
+            android:text="@string/android_txt"
+            android:textSize="@dimen/medium_text"/>
+
+        <!-- COUNTRY -->
+        <TextView
+            android:id="@+id/country_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/standard_clickable_element"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/track_tv"
+            android:layout_marginTop="@dimen/standard_space"
+            android:layout_marginStart="@dimen/medium_space"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/oswald"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="@string/country_txt"
+            android:textSize="@dimen/medium_text"/>
+
+        <TextView
+            android:id="@+id/my_country_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/standard_clickable_element"
+            app:layout_constraintStart_toEndOf="@id/country_tv"
+            app:layout_constraintTop_toBottomOf="@id/my_track_tv"
+            android:layout_marginTop="@dimen/standard_space"
+            android:layout_marginStart="@dimen/medium_space"
+            android:layout_marginEnd="@dimen/medium_space"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/allerta_stencil"
+            android:textColor="@color/colorAccent"
+            android:text="@string/my_country_txt"
+            android:textSize="@dimen/medium_text"/>
+
+
+        <!-- EMAIL -->
+        <TextView
+            android:id="@+id/email_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/standard_clickable_element"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/country_tv"
+            android:layout_marginTop="@dimen/standard_space"
+            android:layout_marginStart="@dimen/medium_space"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/oswald"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="@string/email_txt"
+            android:textSize="@dimen/medium_text"/>
+
+        <TextView
+            android:id="@+id/my_email_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/standard_clickable_element"
+            app:layout_constraintStart_toEndOf="@id/email_tv"
+            app:layout_constraintTop_toBottomOf="@id/my_country_tv"
+            android:layout_marginTop="@dimen/standard_space"
+            android:layout_marginStart="@dimen/medium_space"
+            android:layout_marginEnd="@dimen/medium_space"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/allerta_stencil"
+            android:textColor="@color/colorAccent"
+            android:text="@string/my_email_txt"
+            android:textSize="@dimen/medium_text"/>
+
+        <!--PHONE -->
+        <TextView
+            android:id="@+id/phone_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/standard_clickable_element"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/email_tv"
+            android:layout_marginTop="@dimen/standard_space"
+            android:layout_marginStart="@dimen/medium_space"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/oswald"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="@string/phone_txt"
+            android:textSize="@dimen/medium_text"/>
+
+        <TextView
+            android:id="@+id/my_phone_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/standard_clickable_element"
+            app:layout_constraintStart_toEndOf="@id/phone_tv"
+            app:layout_constraintTop_toBottomOf="@id/my_email_tv"
+            android:layout_marginTop="@dimen/standard_space"
+            android:layout_marginStart="@dimen/medium_space"
+            android:layout_marginEnd="@dimen/medium_space"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/allerta_stencil"
+            android:textColor="@color/colorAccent"
+            android:text="@string/my_phone_txt"
+            android:textSize="@dimen/medium_text"/>
+
+        <!-- SLACK -->
+        <TextView
+            android:id="@+id/slack_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/standard_clickable_element"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/phone_tv"
+            android:layout_marginTop="@dimen/standard_space"
+            android:layout_marginStart="@dimen/medium_space"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/oswald"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="@string/slack_username_txt"
+            android:textSize="@dimen/medium_text"/>
+
+        <TextView
+            android:id="@+id/my_slack_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/standard_clickable_element"
+            android:layout_marginStart="@dimen/medium_space"
+            android:layout_marginTop="@dimen/standard_space"
+            android:fontFamily="@font/allerta_stencil"
+            android:gravity="center_vertical"
+            android:text="@string/my_slack_username_txt"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/medium_text"
+            app:layout_constraintStart_toEndOf="@id/slack_tv"
+            app:layout_constraintTop_toBottomOf="@id/my_phone_tv" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+
+    </ScrollView>
+
+
+</LinearLayout>
